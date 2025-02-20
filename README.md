@@ -9,9 +9,6 @@ to your **~/quicklisp/local-projects** directory. Then in **~/quicklisp/local-pr
 
 to get all of the library examples from my book.
 
-2024/01/09: updated to latest OpenAI APIs, now using gpt-4
-
-
 ## setting your PERPLEXITY_API_KEY API key
  
  Define the  "PERPLEXITY_API_KEY" environment variable with the value of your Perplexity API key
