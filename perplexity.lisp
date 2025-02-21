@@ -1,12 +1,13 @@
 (in-package #:perplexity)
 
-;; define the environment variable "OPENAI_KEY" with the value of your OpenAI API key
+;; define the environment variable "PERPLEXITY_API_KEY" with the value of your Perplexity API key
 
 (defvar *model-host* "https://api.perplexity.ai/chat/completions")
-;; use gpt-4o for very good results, or gpt-4o-mini to save abt 20x on costs, with similar results:
 (defvar *model* "sonar-pro")
 
-(defun openai-helper (curl-command)
+(defun research-helper (curl-command)
+  "this function is identical to the function openai-helper in
+   the library https://github.com/mark-watson/openai"
   (princ curl-command)
   (let ((response
           (uiop:run-program
@@ -16,7 +17,7 @@
     (with-input-from-string
         (s response)
       (let* ((json-as-list (json:decode-json s)))
-        ;; extract text (this might change if OpenAI changes JSON return format):
+        ;; extract text (this might change if Perplexity or OpenAI changes JSON return format):
         (cdr (assoc :content (cdr (assoc :message (cadr (assoc :choices json-as-list))))))))))
 
 
@@ -36,7 +37,7 @@
                    *model-host*
                    (uiop:getenv "PERPLEXITY_API_KEY")
                    request-body)))
-    (openai-helper curl-command)))
+    (research-helper curl-command)))
 
 #|
 
